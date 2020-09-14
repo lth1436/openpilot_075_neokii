@@ -25,7 +25,7 @@ def create_lkas11(packer, frame, car_fingerprint, apply_steer, steer_req,
     values["CF_Lkas_FcwOpt_USM"] = 1
     values["CF_Lkas_LdwsOpt_USM"] = 3
 
-  if car_fingerprint in [CAR.SONATA, CAR.PALISADE, CAR.SONATA_H]:
+  if car_fingerprint in [CAR.SONATA, CAR.PALISADE, CAR.SONATA_H, CAR.KIA_NIRO_HEV]:
     values["CF_Lkas_Bca_R"] = int(left_lane) + (int(right_lane) << 1)
     values["CF_Lkas_LdwsOpt_USM"] = 2
 

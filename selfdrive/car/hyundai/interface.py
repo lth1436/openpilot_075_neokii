@@ -192,15 +192,15 @@ class CarInterface(CarInterfaceBase):
       ret.steerLimitTimer = 0.8
 
     elif candidate == CAR.K7_HYBRID:
-      tire_stiffness_factor = 0.9
-      ret.mass = 1685. + STD_CARGO_KG
-      ret.wheelbase = 2.855
-      ret.steerRatio = 14.4
+      tire_stiffness_factor = 0.8
+      ret.mass = 1425. + STD_CARGO_KG
+      ret.wheelbase = 2.7
+      ret.steerRatio = 13.73
       ret.steerActuatorDelay = 0.3
       ret.steerRateCost = 0.5
-      ret.steerLimitTimer = 0.4
+      ret.steerLimitTimer = 0.6
       ret.lateralTuning.init('lqr')
-      ret.lateralTuning.lqr.scale = 1850.0
+      ret.lateralTuning.lqr.scale = 2000.0
       ret.lateralTuning.lqr.ki = 0.03
       ret.lateralTuning.lqr.a = [0., 1., -0.22619643, 1.21822268]
       ret.lateralTuning.lqr.b = [-1.92006585e-04, 3.95603032e-05]
@@ -208,6 +208,28 @@ class CarInterface(CarInterfaceBase):
       ret.lateralTuning.lqr.k = [-100., 450.]
       ret.lateralTuning.lqr.l = [0.22, 0.318]
       ret.lateralTuning.lqr.dcGain = 0.003
+      
+    elif candidate == CAR.KIA_NIRO_HEV:
+      ret.steerActuatorDelay = 0.3
+      ret.steerRateCost = 0.45
+      ret.steerLimitTimer = 0.4
+      ret.lateralTuning.init('lqr')
+      ret.lateralTuning.lqr.scale = 1750.0
+      ret.lateralTuning.lqr.ki = 0.03
+      ret.lateralTuning.lqr.a = [0., 1., -0.22619643, 1.21822268]
+      ret.lateralTuning.lqr.b = [-1.92006585e-04, 3.95603032e-05]
+      ret.lateralTuning.lqr.c = [1., 0.]
+      ret.lateralTuning.lqr.k = [-100., 450.]
+      ret.lateralTuning.lqr.l = [0.22, 0.318]
+      ret.lateralTuning.lqr.dcGain = 0.003
+#      ret.lateralTuning.pid.kf = 0.00005
+      ret.mass = 1425. + STD_CARGO_KG
+      ret.wheelbase = 2.7
+      ret.steerRatio = 13.73   #Spec
+      tire_stiffness_factor = 0.385
+#      ret.lateralTuning.pid.kiBP, ret.lateralTuning.pid.kpBP = [[0.], [0.]]
+#      ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.25], [0.05]]
+
 
     ret.centerToFront = ret.wheelbase * 0.4
 
@@ -235,7 +257,7 @@ class CarInterface(CarInterfaceBase):
 
     # steer, gas, brake limitations VS speed
     ret.steerMaxBP = [0.]
-    ret.steerMaxV = [1.2]
+    ret.steerMaxV = [1.0]
     ret.gasMaxBP = [0.]
     ret.gasMaxV = [0.5]
     ret.brakeMaxBP = [0., 20.]
@@ -343,3 +365,4 @@ class CarInterface(CarInterfaceBase):
                                c.hudControl.rightLaneVisible, c.hudControl.leftLaneDepart, c.hudControl.rightLaneDepart)
     self.frame += 1
     return can_sends
+
